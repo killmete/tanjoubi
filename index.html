@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お誕生日おめでとう 🎂</title>
+    <title>キミだけに</title>
     <meta name="description" content="A special birthday commemoration page filled with love and warm wishes.">
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -20,12 +20,14 @@
                     },
                     fontFamily: {
                         sans: ['"Kanit"', 'sans-serif'],
+                        handwritten: ['"Zen Kurenaido"', '"Yusei Magic"', 'cursive'],
                     },
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Yusei+Magic&family=Zen+Kurenaido&display=swap"
         rel="stylesheet">
 
     <style>
@@ -62,7 +64,7 @@
             /* Dimensions set by JS using screen.width/height (never changes on iOS) */
             z-index: 0;
             background-image:
-                linear-gradient(rgba(30, 20, 45, 0.6), rgba(10, 5, 20, 0.8)),
+                linear-gradient(rgba(30, 20, 45, 0.6), rgba(10, 5, 20, 0.3)),
                 url('background.jpg'),
                 radial-gradient(ellipse at 30% 20%, rgba(137, 207, 240, 0.15) 0%, transparent 60%),
                 radial-gradient(ellipse at 70% 80%, rgba(255, 209, 220, 0.15) 0%, transparent 60%),
@@ -220,6 +222,46 @@
             transition-delay: 0.9s;
         }
 
+        .stagger-child:nth-child(6) {
+            transition-delay: 1.1s;
+        }
+
+        .stagger-child:nth-child(7) {
+            transition-delay: 1.3s;
+        }
+
+        .stagger-child:nth-child(8) {
+            transition-delay: 1.5s;
+        }
+
+        .stagger-child:nth-child(9) {
+            transition-delay: 1.7s;
+        }
+
+        .stagger-child:nth-child(10) {
+            transition-delay: 1.9s;
+        }
+
+        .stagger-child:nth-child(11) {
+            transition-delay: 2.1s;
+        }
+
+        .stagger-child:nth-child(12) {
+            transition-delay: 2.3s;
+        }
+
+        .stagger-child:nth-child(13) {
+            transition-delay: 2.5s;
+        }
+
+        .stagger-child:nth-child(14) {
+            transition-delay: 2.7s;
+        }
+
+        .stagger-child:nth-child(15) {
+            transition-delay: 2.9s;
+        }
+
         /* =============================================
            GLASS CARD STYLING
            ============================================= */
@@ -252,18 +294,18 @@
         }
 
         /* =============================================
-           SNOWFALL
+           BUBBLES
            ============================================= */
-        .snowflake {
+        .bubble {
             position: fixed;
-            background: white;
             border-radius: 50%;
             pointer-events: none;
             z-index: 2;
-            filter: blur(0.5px);
             opacity: 0.8;
-            transition: opacity 2s ease-out;
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), transparent 25%),
+                rgba(255, 255, 255, 0.05);
+            border: 1px solid currentColor;
+            box-shadow: inset 0 0 15px currentColor, 0 0 12px currentColor, 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
         /* =============================================
@@ -398,7 +440,7 @@
            GRADIENT TEXT UTILITY
            ============================================= */
         .gradient-text {
-            background: linear-gradient(135deg, #FF5E89, #2A7BB5);
+            background: linear-gradient(to right, #ff5e89, #ab7cff, #58a9ff, #42dca3, #f0c541);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -409,6 +451,52 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .glow-text-blue {
+            color: #ffffff;
+            text-shadow:
+                0 0 8px rgba(137, 207, 240, 0.9),
+                0 0 20px rgba(137, 207, 240, 0.6),
+                0 0 40px rgba(137, 207, 240, 0.4);
+        }
+
+        @-webkit-keyframes reveal-wipe {
+            0% {
+                -webkit-clip-path: polygon(-50px -50px, -20px -50px, -20px 150%, -50px 150%);
+                clip-path: polygon(-50px -50px, -20px -50px, -20px 150%, -50px 150%);
+            }
+
+            100% {
+                -webkit-clip-path: polygon(-50px -50px, 150% -50px, 150% 150%, -50px 150%);
+                clip-path: polygon(-50px -50px, 150% -50px, 150% 150%, -50px 150%);
+            }
+        }
+
+        @keyframes reveal-wipe {
+            0% {
+                -webkit-clip-path: polygon(-50px -50px, -20px -50px, -20px 150%, -50px 150%);
+                clip-path: polygon(-50px -50px, -20px -50px, -20px 150%, -50px 150%);
+            }
+
+            100% {
+                -webkit-clip-path: polygon(-50px -50px, 150% -50px, 150% 150%, -50px 150%);
+                clip-path: polygon(-50px -50px, 150% -50px, 150% 150%, -50px 150%);
+            }
+        }
+
+        .reveal-wipe-animate {
+            display: inline-block;
+            opacity: 0;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            /* iOS Safari HW acceleration fix */
+        }
+
+        body.revealed .reveal-wipe-animate {
+            opacity: 1;
+            -webkit-animation: reveal-wipe 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1.5s;
+            animation: reveal-wipe 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1.5s;
         }
 
         /* =============================================
@@ -450,6 +538,27 @@
             animation: scrollBounce 2s ease-in-out infinite;
         }
 
+        /* =============================================
+           FLOATING TEXT
+           ============================================= */
+        @keyframes customFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(1deg) scale(1.03);
+            }
+        }
+
+        .animate-float-text {
+            display: inline-block;
+            animation: customFloat 5s ease-in-out infinite;
+            transform-origin: center;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -486,7 +595,7 @@
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
             </svg>
         </div>
-        <p class="tap-prompt">Tap anywhere to begin</p>
+        <p class="tap-prompt">แตะเพื่อเริ่ม</p>
     </div>
 
     <!-- =============================================
@@ -499,17 +608,20 @@
              ========================================== -->
         <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
             <div class="reveal-section">
-                <p class="stagger-child text-white/50 text-sm tracking-[5px] uppercase mb-6">✦ a special day ✦</p>
-                <h1 class="stagger-child text-5xl md:text-7xl font-extrabold gradient-text pb-2 leading-tight">
-                    #君色に染まれ
-                </h1>
-                <p class="stagger-child text-xl md:text-2xl text-white/70 font-light mt-4">
-                    お誕生日おめでとう 🎂
+                <p class="stagger-child text-white/50 text-sm tracking-[5px] uppercase mb-6">✦ วันอันแสนพิเศษ ✦</p>
+                <div class="stagger-child pb-2">
+                    <h1
+                        class="animate-float-text text-5xl md:text-7xl font-handwritten font-bold glow-text-blue leading-tight tracking-widest px-8">
+                        <span class="reveal-wipe-animate">君色に染まれ</span>
+                    </h1>
+                </div>
+                <p class="stagger-child text-xl md:text-2xl text-white/70 tracking-[5px] font-light mt-4">
+                    特別な日 🎂
                 </p>
                 <div class="stagger-child cute-divider mt-8 mb-4">
                     <span class="text-white/40">❄</span>
                 </div>
-                <p class="stagger-child text-white/40 text-sm scroll-indicator mt-6">↓ scroll down ↓</p>
+                <p class="stagger-child text-white/40 text-sm scroll-indicator mt-6">↓ เลื่อนลงข้างล่าง ↓</p>
             </div>
         </section>
 
@@ -530,10 +642,14 @@
             <div class="reveal-section glass-card-dark text-center">
                 <p class="stagger-child text-3xl mb-4">🌸</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text-soft mb-4">
-                    On this special day...
+                    ในวันนี้เมื่อ 19 ปีที่แล้ว...
                 </h2>
                 <p class="stagger-child text-white/70 text-lg leading-relaxed">
-                    The stars aligned, the snow fell softly, and someone truly wonderful came into this world.
+                    ณ สถานที่แห่งหนึ่ง.. <br>
+                    ได้มีบุคคลอันแสนวิเศษได้ถือกำเนิดขึ้นมาบนโลกใบนี้
+                </p>
+                <p class="stagger-child text-gray-500 text-base mt-4 italic">
+                    "ขอขอบคุณที่เติบโตมาจวบจนทุกวันนี้"
                 </p>
             </div>
         </section>
@@ -543,13 +659,14 @@
             <div class="reveal-section glass-card text-center">
                 <p class="stagger-child text-3xl mb-4">💕</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text mb-4">
-                    Every moment with you...
+                    ทุกช่วงเวลาที่ได้ใช้ร่วมกัน...
                 </h2>
                 <p class="stagger-child text-gray-700 text-lg leading-relaxed">
-                    Is a memory I treasure. Your smile lights up even the coldest winter days.
+                    จะเป็นความทรงจำที่ถูกเก็บรักษาไว้ตลอดไป <br>
+                    รอยยิ้มที่อ้วนแสดงนั้นทำให้โลกสดใสขึ้นเสมอ
                 </p>
                 <p class="stagger-child text-gray-500 text-base mt-4 italic">
-                    "You make the world a more beautiful place just by being in it."
+                    "การเดินทางที่แสนกังวลก็ไม่น่ากลัวอีกต่อไป.."
                 </p>
             </div>
         </section>
@@ -559,13 +676,15 @@
             <div class="reveal-section glass-card-dark text-center">
                 <p class="stagger-child text-3xl mb-4">✨</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text-soft mb-4">
-                    What I wish for you...
+                    สิ่งที่ปรารถนาคือ...
                 </h2>
                 <p class="stagger-child text-white/70 text-lg leading-relaxed">
-                    Endless happiness, warm hugs, and all the love the universe can offer.
+                    ขอให้อ้วนมีความสุขกับการใช้ชีวิตบนโลกใบนี้ <br>
+                    ให้ทุกสรรพสิ่งโอบกอดอ้วนไว้ด้วยความอ่อนโยน <br>
+                    ขอให้ทุกคำอธิษฐานที่ตั้งไว้เป็นจริง
                 </p>
                 <p class="stagger-child text-white/50 text-base mt-4">
-                    May every dream you hold dear come true 🌙
+                    "ท่ามกลางโลกใบนี้การที่ได้พบเจอกันของเรานั้นราวกับเรื่องปฎิหารย์"
                 </p>
             </div>
         </section>
@@ -575,10 +694,16 @@
             <div class="reveal-section glass-card text-center">
                 <p class="stagger-child text-3xl mb-4">🎂</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text mb-4">
-                    Today is yours.
+                    วันนี้เป็นวันของอ้วน
                 </h2>
                 <p class="stagger-child text-gray-700 text-lg leading-relaxed">
-                    Blow out the candles, make a wish, and know that you are loved beyond words.
+                    ขอให้รับรู้ว่าอ้วนถูกรักมากกว่าคำพูดใดๆจะอธิบายได้ <br>
+                    เค้าไม่ต้องการมันเลยสักอย่าง
+                    อ้วนคือทุกสิ่งทุกอย่างของเค้า
+                </p>
+                <p class="stagger-child text-gray-500 text-base mt-4 italic">
+                    "เฝ้าอธิษฐานอย่างแผ่วเบากับปัจจุบันนี้ <br>
+                    ขอให้ความรู้สึกที่ยังส่งไปให้ไม่มากพอได้ส่งไปให้ถึง"
                 </p>
             </div>
         </section>
@@ -587,17 +712,24 @@
         <section class="min-h-screen flex items-center justify-center px-4 py-20">
             <div class="reveal-section text-center">
                 <p class="stagger-child text-5xl mb-6">🎉</p>
-                <h2 class="stagger-child text-4xl md:text-5xl font-extrabold gradient-text mb-6">
-                    Happy Birthday!
+                <h2
+                    class="stagger-child text-4xl md:text-5xl font-handwritten font-bold animate-float-text glow-text-blue mb-6">
+                    お誕生日おめでとう
                 </h2>
-                <p class="stagger-child text-white/60 text-lg">
-                    With all my love, today and always 💗
-                </p>
-                <div class="stagger-child mt-10">
-                    <a href=".."
-                        class="inline-block px-8 py-3.5 rounded-full bg-gradient-to-r from-babyBlue to-darkBlue text-white font-bold text-lg shadow-lg shadow-babyBlue/30 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 active:scale-95">
-                        Leave a Note 💌
-                    </a>
+                <p class="stagger-child text-white/60 text-lg mb-1">ปาฏิหาริย์ที่ขยับเข้าใกล้ทุกครั้งที่ได้สัมผัส</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ร่องรอยเส้นทางที่ได้มาเวียนบรรจบกับเธอ</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ทุกสิ่งทุกอย่างเริ่มต้นจากตรงนี้</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">โลกที่พวกเราได้ทอดมองร่วมกัน
+                    หลังจากพานพบกันด้วยโชคชะตา</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ถึงจะเขินอายที่ต้องมาพูดจาเป็นทางการแบบนี้ก็เถอะ</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">แต่ขอบคุณนะ รักเธอที่สุดเลย</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ถ้ามีแค่ฉันเพียงลำพัง ถ้าหากไม่มีเธอ</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ฉันคงไม่สามารถเปล่งประกายได้หรอกนะ</p>
+                <p class="stagger-child text-white/60 text-lg">ตัวฉันที่รักเธอมากซะจนราวกับเป็นเรื่องโกหก</p>
+                <div class="stagger-child mt-12 pb-8">
+                    <p class="text-white/50 text-sm tracking-widest font-light">
+                        Made with <span class="animate-pulse inline-block text-[#ff5e89]">❤</span> by @jellyfish
+                    </p>
                 </div>
             </div>
         </section>
@@ -641,7 +773,7 @@
          MINI MUSIC PLAYER (same as reference)
          ============================================= -->
     <div id="mini-player" tabindex="0"
-        class="group fixed top-5 right-4 z-50 flex flex-col gap-2 bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border-2 border-white transition-all duration-500 hover:bg-white w-14 h-14 overflow-hidden text-darkBlue focus-within:w-64 focus-within:h-24 focus-within:rounded-2xl focus-within:p-3.5 hover:w-64 hover:h-24 hover:rounded-2xl hover:p-3.5 md:w-64 md:h-24 md:rounded-2xl md:p-3.5 cursor-pointer md:cursor-default">
+        class="hidden group fixed top-5 right-4 z-50 flex flex-col gap-2 bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border-2 border-white transition-all duration-500 hover:bg-white w-14 h-14 overflow-hidden text-darkBlue focus-within:w-64 focus-within:h-24 focus-within:rounded-2xl focus-within:p-3.5 hover:w-64 hover:h-24 hover:rounded-2xl hover:p-3.5 md:w-64 md:h-24 md:rounded-2xl md:p-3.5 cursor-pointer md:cursor-default">
         <div class="flex items-center gap-3 w-56 shrink-0 transition-transform duration-500">
             <!-- Play/Pause Button -->
             <button id="music-toggle"
@@ -781,7 +913,7 @@
                 });
 
                 // Start animations
-                startSnowfall();
+                startBubbles();
                 startStars();
             };
 
@@ -919,56 +1051,60 @@
             });
 
             // =============================================
-            // 4. SNOWFALL (optimized for mobile/iOS)
+            // 4. BUBBLES ANIMATION (optimized for mobile/iOS)
             // =============================================
-            let snowActive = false;
+            let bubblesActive = false;
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const MAX_SNOWFLAKES = isMobile ? 35 : 80;
-            const SNOW_SPAWN_RATE = isMobile ? 300 : 120;
-            let activeSnowflakes = 0;
+            const MAX_BUBBLES = isMobile ? 25 : 45;
+            const BUBBLE_SPAWN_RATE = isMobile ? 400 : 200;
+            let activeBubbles = 0;
 
-            const spawnSnowflake = () => {
-                if (activeSnowflakes >= MAX_SNOWFLAKES) return;
-                activeSnowflakes++;
+            const pastelColors = ['#ff8da1', '#c79bf2', '#8bb1ff', '#8de3c2', '#fdf3a9', '#ffb6c1', '#b3d4ff'];
 
-                const flake = document.createElement('div');
-                flake.className = 'snowflake';
-                const size = Math.random() * 3 + 2;
-                flake.style.width = `${size}px`;
-                flake.style.height = `${size}px`;
+            const spawnBubble = () => {
+                if (activeBubbles >= MAX_BUBBLES) return;
+                activeBubbles++;
+
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 20 + 8; // 8px to 28px
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
 
                 const startX = Math.random() * window.innerWidth;
-                const endX = startX + (Math.random() - 0.5) * 80;
+                const endX = startX + (Math.random() - 0.5) * 200;
 
-                flake.style.left = '0px';
-                flake.style.top = '0px';
-                document.body.appendChild(flake);
+                bubble.style.left = '0px';
+                bubble.style.top = '0px';
+                document.body.appendChild(bubble);
 
-                const finalX = Math.max(0, Math.min(window.innerWidth - size, endX));
-                const fallDistance = window.innerHeight + 10;
-                const fallDuration = Math.random() * 3000 + 4000;
+                const finalX = Math.max(-50, Math.min(window.innerWidth + 50, endX));
+                const startY = window.innerHeight + 20;
+                const finalY = -50;
+                const duration = Math.random() * 4000 + 5000; // Slow, gentle float
 
-                const anim = flake.animate([
-                    { transform: `translate(${startX}px, -10px)` },
-                    { transform: `translate(${finalX}px, ${fallDistance}px)` }
+                const anim = bubble.animate([
+                    { transform: `translate(${startX}px, ${startY}px) scale(0.8)` },
+                    { transform: `translate(${finalX}px, ${finalY}px) scale(1.1)` }
                 ], {
-                    duration: fallDuration,
-                    easing: 'linear',
+                    duration: duration,
+                    easing: 'ease-in-out',
                     fill: 'forwards'
                 });
 
                 anim.onfinish = () => {
-                    flake.remove();
-                    activeSnowflakes--;
+                    bubble.remove();
+                    activeBubbles--;
                 };
             };
 
-            const startSnowfall = () => {
-                if (snowActive) return;
-                snowActive = true;
-                const initialBurst = isMobile ? 10 : 20;
-                for (let i = 0; i < initialBurst; i++) setTimeout(spawnSnowflake, i * 80);
-                setInterval(spawnSnowflake, SNOW_SPAWN_RATE);
+            const startBubbles = () => {
+                if (bubblesActive) return;
+                bubblesActive = true;
+                const initialBurst = isMobile ? 8 : 15;
+                for (let i = 0; i < initialBurst; i++) setTimeout(spawnBubble, i * 150);
+                setInterval(spawnBubble, BUBBLE_SPAWN_RATE);
             };
 
 
