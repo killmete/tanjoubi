@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #1a1020;">
+<html lang="en" style="background-color: #0a0a0f; transition: background-color 2s ease-out;">
 
 <head>
     <meta charset="UTF-8">
@@ -36,37 +36,32 @@
             scroll-behavior: smooth;
             /* Prevent iOS overscroll showing gaps */
             -webkit-overflow-scrolling: touch;
-            overscroll-behavior-y: none;
         }
 
-        /* Scroll snapping + base background */
         html {
-            scroll-snap-type: y proximity;
-            -webkit-scroll-snap-type: y proximity;
-            background-color: #1a1020;
+            background-color: #0a0a0f;
         }
 
         html.revealed {
-            background-color: #1a1020;
+            background-color: #140a1e;
         }
 
         body {
-            background-color: #1a1020;
+            background-color: #0a0a0f;
         }
 
         body.revealed {
-            background-color: transparent;
+            background-color: #140a1e;
         }
 
-        /* Fixed background — same as reference */
-        body::before {
-            content: '';
+        /* Fixed background layer */
+        #bg-layer {
             position: fixed;
             top: -150px;
             left: -150px;
             right: -150px;
             bottom: -150px;
-            z-index: -2;
+            z-index: 0;
             background-image:
                 linear-gradient(rgba(30, 20, 45, 0.6), rgba(10, 5, 20, 0.8)),
                 url('background.jpg'),
@@ -81,7 +76,7 @@
             transition: opacity 2s ease-out;
         }
 
-        body.revealed::before {
+        #bg-layer.show {
             opacity: 1;
         }
 
@@ -143,6 +138,33 @@
             50% {
                 opacity: 1;
                 transform: scale(1.05);
+            }
+        }
+
+        /* =============================================
+           INTRO SPARKLE STARS
+           ============================================= */
+        .intro-sparkle {
+            position: absolute;
+            pointer-events: none;
+            /* 4-point star shape */
+            clip-path: polygon(50% 0%, 61% 35%, 100% 50%, 61% 65%,
+                    50% 100%, 39% 65%, 0% 50%, 39% 35%);
+            background: rgba(255, 255, 255, 0.85);
+            animation: sparkleTwinkle ease-in-out infinite;
+        }
+
+        @keyframes sparkleTwinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.3) rotate(0deg);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(1) rotate(45deg);
             }
         }
 
@@ -449,6 +471,8 @@
 </head>
 
 <body class="font-sans text-gray-800 relative">
+    <!-- Background Layer -->
+    <div id="bg-layer"></div>
     <!-- Northern Lights -->
     <div class="northern-lights"></div>
 
@@ -456,6 +480,7 @@
          INTRO OVERLAY — Black screen, tap to start
          ============================================= -->
     <div id="intro-overlay">
+        <div id="intro-sparkles"></div>
         <div class="tap-icon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
@@ -467,20 +492,19 @@
     <!-- =============================================
          MAIN SCROLLABLE CONTENT
          ============================================= -->
-    <main id="main-content" style="opacity: 0; transition: opacity 2s ease-out 0.5s;">
+    <main id="main-content" style="opacity: 0; transition: opacity 2s ease-out 0.5s; position: relative; z-index: 1;">
 
         <!-- ==========================================
              HERO SECTION
              ========================================== -->
-        <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative"
-            style="scroll-snap-align: center;">
+        <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
             <div class="reveal-section">
                 <p class="stagger-child text-white/50 text-sm tracking-[5px] uppercase mb-6">✦ a special day ✦</p>
                 <h1 class="stagger-child text-5xl md:text-7xl font-extrabold gradient-text pb-2 leading-tight">
-                    お誕生日おめでとう
+                    #君色に染まれ
                 </h1>
                 <p class="stagger-child text-xl md:text-2xl text-white/70 font-light mt-4">
-                    Happy Birthday 🎂
+                    お誕生日おめでとう 🎂
                 </p>
                 <div class="stagger-child cute-divider mt-8 mb-4">
                     <span class="text-white/40">❄</span>
@@ -502,7 +526,7 @@
              ========================================== -->
 
         <!-- SECTION 1 -->
-        <section class="min-h-screen flex items-center justify-center px-4 py-20" style="scroll-snap-align: center;">
+        <section class="min-h-[70vh] flex items-center justify-center px-4 py-20">
             <div class="reveal-section glass-card-dark text-center">
                 <p class="stagger-child text-3xl mb-4">🌸</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text-soft mb-4">
@@ -515,7 +539,7 @@
         </section>
 
         <!-- SECTION 2 -->
-        <section class="min-h-screen flex items-center justify-center px-4 py-20" style="scroll-snap-align: center;">
+        <section class="min-h-[70vh] flex items-center justify-center px-4 py-20">
             <div class="reveal-section glass-card text-center">
                 <p class="stagger-child text-3xl mb-4">💕</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text mb-4">
@@ -531,7 +555,7 @@
         </section>
 
         <!-- SECTION 3 -->
-        <section class="min-h-screen flex items-center justify-center px-4 py-20" style="scroll-snap-align: center;">
+        <section class="min-h-[70vh] flex items-center justify-center px-4 py-20">
             <div class="reveal-section glass-card-dark text-center">
                 <p class="stagger-child text-3xl mb-4">✨</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text-soft mb-4">
@@ -547,7 +571,7 @@
         </section>
 
         <!-- SECTION 4 -->
-        <section class="min-h-screen flex items-center justify-center px-4 py-20" style="scroll-snap-align: center;">
+        <section class="min-h-[70vh] flex items-center justify-center px-4 py-20">
             <div class="reveal-section glass-card text-center">
                 <p class="stagger-child text-3xl mb-4">🎂</p>
                 <h2 class="stagger-child text-2xl md:text-3xl font-bold gradient-text mb-4">
@@ -560,7 +584,7 @@
         </section>
 
         <!-- SECTION 5 — Final -->
-        <section class="min-h-screen flex items-center justify-center px-4 py-20" style="scroll-snap-align: center;">
+        <section class="min-h-screen flex items-center justify-center px-4 py-20">
             <div class="reveal-section text-center">
                 <p class="stagger-child text-5xl mb-6">🎉</p>
                 <h2 class="stagger-child text-4xl md:text-5xl font-extrabold gradient-text mb-6">
@@ -666,6 +690,29 @@
             window.scrollTo(0, 0);
 
             // =============================================
+            // 0. INTRO SPARKLE STARS
+            // =============================================
+            const sparkleContainer = document.getElementById('intro-sparkles');
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'intro-sparkle';
+                const size = Math.random() * 5 + 3; // 3px to 8px
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                // Avoid center zone (35%-65% on both axes) so sparkles don't cover text/icon
+                let x, y;
+                do {
+                    x = Math.random() * 100;
+                    y = Math.random() * 100;
+                } while (x > 25 && x < 75 && y > 30 && y < 70);
+                sparkle.style.left = `${x}%`;
+                sparkle.style.top = `${y}%`;
+                sparkle.style.animationDuration = `${Math.random() * 2.5 + 2}s`; // 2s to 4.5s
+                sparkle.style.animationDelay = `${Math.random() * 4}s`;
+                sparkleContainer.appendChild(sparkle);
+            }
+
+            // =============================================
             // 1. INTRO OVERLAY — Tap to begin
             // =============================================
             const overlay = document.getElementById('intro-overlay');
@@ -687,6 +734,7 @@
                 // Reveal body background
                 document.body.classList.add('revealed');
                 document.documentElement.classList.add('revealed');
+                document.getElementById('bg-layer').classList.add('show');
 
                 // Show main content
                 mainContent.style.opacity = '1';
