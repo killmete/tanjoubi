@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お誕生日おめでとう 🎂</title>
     <meta name="description" content="A special birthday commemoration page filled with love and warm wishes.">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +34,6 @@
             overflow-x: hidden;
             width: 100%;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -78,10 +76,7 @@
            ============================================= */
         #intro-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             z-index: 9999;
             background: #0a0a0f;
             display: flex;
@@ -89,10 +84,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            -webkit-transition: opacity 1.5s ease-out;
             transition: opacity 1.5s ease-out;
-            /* Prevent scroll behind overlay on iOS */
-            -webkit-touch-callout: none;
         }
 
         #intro-overlay.fade-out {
@@ -145,10 +137,7 @@
            ============================================= */
         .reveal-section {
             opacity: 0;
-            -webkit-transform: translateY(60px);
             transform: translateY(60px);
-            -webkit-transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                -webkit-transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: opacity, transform;
@@ -156,7 +145,6 @@
 
         .reveal-section.visible {
             opacity: 1;
-            -webkit-transform: translateY(0);
             transform: translateY(0);
         }
 
@@ -168,9 +156,7 @@
 
         .stagger-child {
             opacity: 0;
-            -webkit-transform: translateY(30px);
             transform: translateY(30px);
-            -webkit-transition: opacity 0.8s ease-out, -webkit-transform 0.8s ease-out;
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
@@ -421,53 +407,10 @@
         }
 
         .scroll-indicator {
-            -webkit-animation: scrollBounce 2s ease-in-out infinite;
             animation: scrollBounce 2s ease-in-out infinite;
         }
 
-        /* iOS Safari: use dvh with vh fallback for full-height sections */
-        .min-h-screen {
-            min-height: 100vh;
-            min-height: 100dvh;
-        }
-
-        /* Range input iOS fix */
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-        }
-
-        input[type="range"]::-webkit-slider-runnable-track {
-            height: 4px;
-            border-radius: 2px;
-            background: #e5e7eb;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #FF5E89;
-            margin-top: -5px;
-            border: none;
-        }
-
-        #volume-slider::-webkit-slider-thumb {
-            background: #89CFF0;
-        }
-
-        /* Safe area padding for notched iPhones */
-        @supports (padding: env(safe-area-inset-top)) {
-            #mini-player {
-                top: calc(1.25rem + env(safe-area-inset-top));
-                right: calc(1rem + env(safe-area-inset-right));
-            }
-        }
-
-        /* Custom scrollbar (non-iOS, since iOS hides scrollbars) */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -506,8 +449,7 @@
     <!-- =============================================
          MAIN SCROLLABLE CONTENT
          ============================================= -->
-    <main id="main-content"
-        style="opacity: 0; -webkit-transition: opacity 2s ease-out 0.5s; transition: opacity 2s ease-out 0.5s;">
+    <main id="main-content" style="opacity: 0; transition: opacity 2s ease-out 0.5s;">
 
         <!-- ==========================================
              HERO SECTION
@@ -687,7 +629,7 @@
             <span id="time-display" class="ml-auto text-xs font-bold text-gray-400">0:00</span>
         </div>
     </div>
-    <audio id="bg-music" playsinline webkit-playsinline preload="auto">
+    <audio id="bg-music">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
@@ -713,16 +655,9 @@
             const miniPlayer = document.getElementById('mini-player');
             let started = false;
 
-            const startExperience = (e) => {
+            const startExperience = () => {
                 if (started) return;
                 started = true;
-
-                // Prevent default to avoid iOS quirks
-                if (e && e.cancelable) e.preventDefault();
-
-                // Re-enable scrolling (was locked during overlay)
-                document.body.style.overflow = '';
-                document.documentElement.style.overflow = '';
 
                 // Fade out overlay
                 overlay.classList.add('fade-out');
@@ -769,15 +704,11 @@
                 startStars();
             };
 
-            // Lock scrolling while overlay is visible
-            document.body.style.overflow = 'hidden';
-            document.documentElement.style.overflow = 'hidden';
-
-            // Listen for any interaction (passive: false for touchstart to allow preventDefault)
+            // Listen for any interaction
             overlay.addEventListener('click', startExperience);
-            overlay.addEventListener('touchstart', startExperience, { passive: false });
+            overlay.addEventListener('touchstart', startExperience);
             document.addEventListener('keydown', (e) => {
-                if (!started) startExperience(e);
+                if (!started) startExperience();
             });
 
             // =============================================
@@ -911,9 +842,6 @@
             const snowColumns = Math.ceil(window.innerWidth / 5);
             const pileHeights = new Array(snowColumns).fill(0);
 
-            // Detect mobile for performance tuning
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
-
             const spawnSnowflake = () => {
                 const flake = document.createElement('div');
                 flake.className = 'snowflake';
@@ -938,49 +866,30 @@
                 const fallDistance = window.innerHeight - landHeight - size;
                 const fallDuration = (fallDistance / window.innerHeight) * (Math.random() * 3000 + 4000);
 
-                // Web Animations API with fallback for older iOS Safari
-                try {
-                    const anim = flake.animate([
-                        { transform: `translate(${startX}px, -10px)` },
-                        { transform: `translate(${finalX}px, ${fallDistance}px)` }
-                    ], {
-                        duration: fallDuration,
-                        easing: 'linear',
-                        fill: 'forwards'
-                    });
+                const anim = flake.animate([
+                    { transform: `translate(${startX}px, -10px)` },
+                    { transform: `translate(${finalX}px, ${fallDistance}px)` }
+                ], {
+                    duration: fallDuration,
+                    easing: 'linear',
+                    fill: 'forwards'
+                });
 
-                    anim.onfinish = () => {
-                        const lifespan = Math.random() * 5000 + 5000;
-                        setTimeout(() => {
-                            flake.style.opacity = '0';
-                            if (pileHeights[col] > 0) pileHeights[col] = Math.max(0, pileHeights[col] - (size * 0.4));
-                            setTimeout(() => flake.remove(), 2000);
-                        }, lifespan);
-                    };
-                } catch (e) {
-                    // Fallback: use CSS transition for older browsers
-                    flake.style.transform = `translate(${startX}px, -10px)`;
-                    flake.style.transition = `transform ${fallDuration}ms linear`;
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            flake.style.transform = `translate(${finalX}px, ${fallDistance}px)`;
-                        });
-                    });
+                anim.onfinish = () => {
+                    const lifespan = Math.random() * 5000 + 5000;
                     setTimeout(() => {
                         flake.style.opacity = '0';
+                        if (pileHeights[col] > 0) pileHeights[col] = Math.max(0, pileHeights[col] - (size * 0.4));
                         setTimeout(() => flake.remove(), 2000);
-                    }, fallDuration + Math.random() * 5000 + 5000);
-                }
+                    }, lifespan);
+                };
             };
 
             const startSnowfall = () => {
                 if (snowActive) return;
                 snowActive = true;
-                // Fewer snowflakes on mobile for better performance
-                const initialCount = isMobile ? 10 : 20;
-                const spawnRate = isMobile ? 200 : 80;
-                for (let i = 0; i < initialCount; i++) setTimeout(spawnSnowflake, i * 50);
-                setInterval(spawnSnowflake, spawnRate);
+                for (let i = 0; i < 20; i++) setTimeout(spawnSnowflake, i * 50);
+                setInterval(spawnSnowflake, 80);
             };
 
             window.addEventListener('resize', () => {
