@@ -57,13 +57,9 @@
         /* Fixed background layer */
         #bg-layer {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            /* Use lvh (largest viewport height) to prevent iOS Safari zoom on scroll */
-            width: calc(100vw + 300px);
-            height: calc(100vh + 300px);
-            height: calc(100lvh + 300px);
-            transform: translate(-50%, -50%);
+            top: -150px;
+            left: -150px;
+            /* Dimensions set by JS using screen.width/height (never changes on iOS) */
             z-index: 0;
             background-image:
                 linear-gradient(rgba(30, 20, 45, 0.6), rgba(10, 5, 20, 0.8)),
@@ -717,6 +713,19 @@
             }
 
             // =============================================
+            // 0b. LOCK BACKGROUND SIZE (iOS Safari fix)
+            // =============================================
+            const bgLayer = document.getElementById('bg-layer');
+            const lockBgSize = () => {
+                // screen.width/height are physical screen dims — never change with browser chrome
+                const w = Math.max(window.screen.width, window.innerWidth);
+                const h = Math.max(window.screen.height, window.innerHeight);
+                bgLayer.style.width = (w + 300) + 'px';
+                bgLayer.style.height = (h + 300) + 'px';
+            };
+            lockBgSize();
+
+            // ==============================================
             // 1. INTRO OVERLAY — Tap to begin
             // =============================================
             const overlay = document.getElementById('intro-overlay');
