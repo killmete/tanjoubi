@@ -191,15 +191,19 @@
         /* Stagger children delay */
         .reveal-section.visible .stagger-child {
             opacity: 1;
-            transform: translateY(0) translateZ(0);
-            -webkit-transform: translateY(0) translateZ(0);
+            transform: translateY(0) scale(1) translateZ(0);
+            -webkit-transform: translateY(0) scale(1) translateZ(0);
+            filter: blur(0px) brightness(1);
+            -webkit-filter: blur(0px) brightness(1);
         }
 
         .stagger-child {
             opacity: 0;
-            transform: translateY(30px) translateZ(0);
-            -webkit-transform: translateY(30px) translateZ(0);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px) scale(1.05) translateZ(0);
+            -webkit-transform: translateY(30px) scale(1.05) translateZ(0);
+            filter: blur(12px) brightness(1.5);
+            -webkit-filter: blur(12px) brightness(1.5);
+            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-filter 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .stagger-child:nth-child(1) {
@@ -717,18 +721,18 @@
                     お誕生日おめでとう
                 </h2>
                 <p class="stagger-child text-white/60 text-lg mb-1">ปาฏิหาริย์ที่ขยับเข้าใกล้ทุกครั้งที่ได้สัมผัส</p>
-                <p class="stagger-child text-white/60 text-lg mb-1">ร่องรอยเส้นทางที่ได้มาเวียนบรรจบกับเธอ</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ร่องรอยเส้นทางที่ได้มาเวียนบรรจบกัน</p>
                 <p class="stagger-child text-white/60 text-lg mb-1">ทุกสิ่งทุกอย่างเริ่มต้นจากตรงนี้</p>
                 <p class="stagger-child text-white/60 text-lg mb-1">โลกที่พวกเราได้ทอดมองร่วมกัน
                     หลังจากพานพบกันด้วยโชคชะตา</p>
                 <p class="stagger-child text-white/60 text-lg mb-1">ถึงจะเขินอายที่ต้องมาพูดจาเป็นทางการแบบนี้ก็เถอะ</p>
-                <p class="stagger-child text-white/60 text-lg mb-1">แต่ขอบคุณนะ รักเธอที่สุดเลย</p>
-                <p class="stagger-child text-white/60 text-lg mb-1">ถ้ามีแค่ฉันเพียงลำพัง ถ้าหากไม่มีเธอ</p>
-                <p class="stagger-child text-white/60 text-lg mb-1">ฉันคงไม่สามารถเปล่งประกายได้หรอกนะ</p>
-                <p class="stagger-child text-white/60 text-lg">ตัวฉันที่รักเธอมากซะจนราวกับเป็นเรื่องโกหก</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">แต่ขอบคุณนะ รักอ้วนที่สุดเลย</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">ถ้ามีแค่เค้าเพียงลำพัง ถ้าหากไม่มีอ้วน</p>
+                <p class="stagger-child text-white/60 text-lg mb-1">เค้าคงไม่สามารถเปล่งประกายได้หรอกนะ</p>
+                <p class="stagger-child text-white/60 text-lg">ตัวเค้าที่รักอ้วนมากซะจนราวกับเป็นเรื่องโกหก</p>
                 <div class="stagger-child mt-12 pb-8">
                     <p class="text-white/50 text-sm tracking-widest font-light">
-                        Made with <span class="animate-pulse inline-block text-[#ff5e89]">❤</span> by @jellyfish
+                        Made with <span class="animate-pulse inline-block text-[#ff5e89]">❤</span> by @jellyfish :3
                     </p>
                 </div>
             </div>
